@@ -7,9 +7,9 @@ public class revStr {
 
     private static void rev(String s) {
         if(s.length()==0)
-            return ;
-        char c = s.charAt(0);
+            return;
         rev(s.substring(1));
+        System.out.println(s.charAt(0));
     }
 
     public static void main(String[] args) {
