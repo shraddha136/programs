@@ -1,4 +1,4 @@
-public class FirstMissingPositive {
+class FirstMissingPositive {
     public int firstMissingPositive(int[] nums) {
 
         int i = 0;
