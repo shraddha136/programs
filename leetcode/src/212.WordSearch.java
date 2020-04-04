@@ -1,23 +1,28 @@
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
-class WordSearch {
+class WordSearch2 {
     char[][] board;
 
 
-    public boolean exist(char[][] board, String word) {
+    public String[] exist(char[][] board, String[] words) {
         this.board = board;
-        if (word == null || word.length() == 0)
-            return false;
 
-        for (int i = 0; i < board.length; i++) {
-            for (int j = 0; j < board[0].length; j++) {
-                if (search(0, i, j, word))
-                    return true;
+        List<String> list = new ArrayList<>();
+        for (String word : words) {
+            if (word == null || word.length() == 0)
+                continue;
 
+            for (int i = 0; i < board.length; i++) {
+                for (int j = 0; j < board[0].length; j++) {
+                    if (search(0, i, j, word)) {
+                        list.add(word);
+                        break;
+                    }
+
+                }
             }
         }
-        return false;
+        return list.toArray(new String[list.size()]);
     }
 
     int[][] directions = {{-1, 0}, {0, 1}, {0, -1}, {1, 0}};
@@ -52,12 +57,13 @@ class WordSearch {
                 {'i', 'h', 'k', 'r'},
                 {'i', 'f', 'l', 'v'}
         };
-        System.out.println(new WordSearch().exist(board, "oath"));
+        String[] words = {"oath", "pea", "eat", "rain"};
+//        System.out.println(Arrays.toString(new WordSearch2().exist(board, words)));
 //        System.out.println(new WordSearch().exist(board, "train"));
 //        System.out.println(new WordSearch().exist(board, "ABCB"));
 //
-//        board = new char[][]{{'a', 'a'}};
-//        System.out.println(new WordSearch().exist(board, "aaa"));
+        board = new char[][]{{'a', 'a'}};
+        System.out.println(Arrays.toString(new WordSearch2().exist(board, new String[]{"a"})));
 //
 //        board = new char[][]{{'a'}};
 //        System.out.println(new WordSearch().exist(board, "b"));
