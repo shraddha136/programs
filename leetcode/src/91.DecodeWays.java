@@ -1,7 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
-
-public class DecodeWays {
+ class DecodeWays {
     public int numDecodings(String s) {
         for (int i = 0; i < s.length(); i++)
             printString(s, i);
