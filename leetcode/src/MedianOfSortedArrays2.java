@@ -13,7 +13,7 @@ public class MedianOfSortedArrays2 {
             int midX = (start + end) / 2;
             int midY = ((x.length + y.length + 1) / 2) - midX;
 
-            int minX = midX == len1 ? Integer.MIN_VALUE : x[midX];
+            int minX = midX == len1 ? Integer.MAX_VALUE : x[midX];
             int minY = midY == len2 ? Integer.MAX_VALUE:y[midY];
             int maxX = midX == 0 ? Integer.MIN_VALUE: x[midX-1];
             int maxY = midY == 0 ? Integer.MIN_VALUE: y[midY -1];
@@ -38,9 +38,10 @@ public class MedianOfSortedArrays2 {
     public static void main(String[] args) {
 //        int[] nums1 = {1, 3, 8, 9, 15};
 //        int[] nums2 = {7, 11, 18, 19, 21, 25};
-
-        int[] nums1 = {23,26,31,35};
-        int[] nums2 = {3,5,7,9,11,16};
+        int[] nums1 = {1,3,5};
+        int[] nums2 = {2,4,6};
+//        int[] nums1 = {23,26,31,35};
+//        int[] nums2 = {3,5,7,9,11,16};
         System.out.println(new MedianOfSortedArrays2().findMedianSortedArrays(nums1, nums2));
     }
 }

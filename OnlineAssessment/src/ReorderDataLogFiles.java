@@ -5,24 +5,51 @@ import java.util.List;
 
 public class ReorderDataLogFiles {
     public String[] reorderLogFiles(String[] logs) {
+//        Arrays.sort(logs, new Comparator<String>() {
+//            @Override
+//            public int compare(String o1, String o2) {
+//                String[] one = o1.split(" ", 2);
+//                String[] two = o2.split(" ", 2);
+//                boolean oDigit = Character.isDigit(one[1].charAt(0));
+//                boolean tDigit = Character.isDigit(two[1].charAt(0));
+//
+//                if (!oDigit && !tDigit) {//both letter logs
+//                    int comp = one[1].compareTo(two[1]);
+//                    if (comp == 0)
+//                        return one[0].compareTo(two[0]);
+//                    return comp;
+//                } else if (!oDigit && !tDigit) {
+//                    return 0;
+//                } else if (oDigit && !tDigit) {
+//                    return 1;
+//                } else
+//                    return -1;
+//            }
+//        });
+//        return logs;
+
         Arrays.sort(logs, new Comparator<String>() {
             @Override
-            public int compare(String o1, String o2) {
-                String[] one = o1.split(" ", 2);
-                String[] two = o2.split(" ", 2);
-                boolean oDigit = Character.isDigit(one[1].charAt(0));
-                boolean tDigit = Character.isDigit(two[1].charAt(0));
+            public int compare(String log1, String log2) {
 
-                if (!oDigit && !tDigit) {//both letter logs
-                    int comp = one[1].compareTo(two[1]);
+
+                String[] singleLog1 = log1.split(" ", 2);
+                String[] singleLog2 = log2.split(" ", 2);
+                boolean digit1 = Character.isDigit(singleLog1[1].charAt(0));
+                boolean digit2 = Character.isDigit(singleLog2[1].charAt(0));
+                if (!digit1 && !digit2) {
+                    String a1 = singleLog1[1];
+                    String a2 = singleLog2[1];
+                    int comp = a1.compareTo(a2);
                     if (comp == 0)
-                        return one[0].compareTo(two[0]);
+                        return singleLog1[0].compareTo(singleLog2[0]);
                     return comp;
-                } else if (!oDigit && !tDigit) {
-                    return 0;
-                } else if (oDigit && !tDigit) {
+                }
+                 else if (digit1 && !digit2)
                     return 1;
-                } else
+                else if (digit1 && digit2)
+                    return 0;
+                else
                     return -1;
             }
         });
