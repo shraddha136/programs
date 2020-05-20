@@ -1,4 +1,4 @@
-import java.util.*;
+ import java.util.*;
 
 class WordBreak {
     public boolean wordBreak(String s, List<String> wordDict) {
@@ -44,17 +44,17 @@ class WordBreak {
     }
 
     public static void main(String[] args) {
-//        String s = "catsandog";
-//        List<String> wordDict = new LinkedList<>();
-//        wordDict.add("cats");
-//        wordDict.add("dog");
-//        wordDict.add("sand");
-//        wordDict.add("and");
-//        wordDict.add("cat");
-        String s = "leetcode";
+        String s = "catsandog";
         List<String> wordDict = new LinkedList<>();
-        wordDict.add("leet");
-        wordDict.add("code");
+        wordDict.add("cats");
+        wordDict.add("dog");
+        wordDict.add("sand");
+        wordDict.add("and");
+        wordDict.add("cat");
+//        String s = "leetcode";
+//        List<String> wordDict = new LinkedList<>();
+//        wordDict.add("leet");
+//        wordDict.add("code");
         System.out.println(new WordBreak().wordBreakBFS(s, wordDict));
     }
 }
