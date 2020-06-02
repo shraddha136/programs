@@ -1,5 +1,3 @@
-import sun.lwawt.macosx.CSystemTray;
-
 import java.util.*;
 
 public class BinaryTree {
@@ -34,8 +32,43 @@ public class BinaryTree {
 //        System.out.println("\n"+"****************");
 //        RevLevelOrder(tree.root);
 //        System.out.println(getHeight(tree.root));
+
+        System.out.println(getSuccessor(tree.root,tree.root.left));
     }
 
+    private static Node getSuccessor(Node root, Node p) {
+        if(root == null)
+            return root;
+        Node node = getInOrder(root,p,false);
+        return getInOrder(node,new Node(-1),true);
+    }
+    static Node node = null;
+    private static Node getInOrder(Node root, Node toFind, boolean done){
+        if(root == null  || done || root == toFind)
+            return root;
+        node = getInOrder(root,toFind,done);
+        if(root == toFind){
+            node =  root;
+        }                                                                                              [''''''''''''''''''
+
+
+
+    ]
+
+
+
+
+
+
+
+
+
+
+
+
+        node = getInOrder(root,toFind,done);
+        return node;
+    }
 
 
     private static int getHeight(Node root) {
@@ -129,6 +162,8 @@ public class BinaryTree {
 
         }
     }
+    
+    
 
 
 }
