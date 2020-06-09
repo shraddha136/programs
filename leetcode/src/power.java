@@ -14,8 +14,25 @@ public class power {
 
         return ans;
     }
+    public static boolean isPowerOfTwo(int n) {
+        if(n<=0)
+            return false;
+        if(n == 1)
+            return true;
+        while(n>1){
+            if(n%2==0){
+                n /= 2;
+            }else return false;
+
+        }
+        return true;
+    }
 
     public static void main(String[] args) {
-        System.out.println(myPow(2.00000,-2147483648));
+//        System.out.println(myPow(2.00000,-2147483648));
+        System.out.println(isPowerOfTwo(1));
+        System.out.println(isPowerOfTwo(2));
+        System.out.println(isPowerOfTwo(4));
+        System.out.println(isPowerOfTwo(100));
     }
 }
