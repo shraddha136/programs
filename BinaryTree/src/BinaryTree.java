@@ -49,23 +49,7 @@ public class BinaryTree {
         node = getInOrder(root,toFind,done);
         if(root == toFind){
             node =  root;
-        }                                                                                              [''''''''''''''''''
-
-
-
-    ]
-
-
-
-
-
-
-
-
-
-
-
-
+        }
         node = getInOrder(root,toFind,done);
         return node;
     }
