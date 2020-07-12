@@ -28,6 +28,7 @@ public class SubSet {
             String w = String.valueOf(word);
 
         }
+        return str;
     }
 
     static PriorityQueue<String> maxHeap  = new PriorityQueue<>((a,b)->(b.length()-a.length()));

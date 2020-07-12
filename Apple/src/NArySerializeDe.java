@@ -1,3 +1,5 @@
+import javafx.scene.control.Cell;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -87,9 +89,9 @@ public class NArySerializeDe {
         Node four = new Node(4);
         Node five = new Node(5);
         Node six = new Node(6);
+
         one.children = Arrays.asList(three,two,four);
         three.children = Arrays.asList(five,six);
-
         NArySerializeDe NArySerializeDe = new NArySerializeDe();
         NArySerializeDe.deserialize(NArySerializeDe.serialize(one));
     }
