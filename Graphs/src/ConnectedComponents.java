@@ -38,38 +38,38 @@ public class ConnectedComponents {
         Node Z = new Node(0);
         Node A = new Node(1);
         Node B = new Node(2);
-//        Node C = new Node(3);
-//        Node D = new Node(4);
-//        Node E = new Node(5);
-//        Node F = new Node(6);
+        Node C = new Node(3);
+        Node D = new Node(4);
+        Node E = new Node(5);
+        Node F = new Node(6);
         graph.addNode(Z);
         graph.addNode(A);
 
 
         graph.addNode(B);
-//        graph.addNode(C);
-//        graph.addNode(D);
-//        graph.addNode(E);
-//        graph.addNode(F);
+        graph.addNode(C);
+        graph.addNode(D);
+        graph.addNode(E);
+        graph.addNode(F);
         Z.addChildren(A);
-//        Z.addChildren(B);
+        Z.addChildren(B);
         A.addChildren(Z);
         A.addChildren(B);
         B.addChildren(A);
-//        B.addChildren(Z);
-//        Z.addChildren(B);
-//        A.addChildren(Z);
-//        A.addChildren(C);
-//        C.addChildren(A);
-//        B.addChildren(Z);
-//        D.addChildren(E);
-//        E.addChildren(F);
-//        E.addChildren(D);
+        B.addChildren(Z);
+        Z.addChildren(B);
+        A.addChildren(Z);
+        A.addChildren(C);
+        C.addChildren(A);
+        B.addChildren(Z);
+        D.addChildren(E);
+        E.addChildren(F);
+        E.addChildren(D);
 //        E.addChildren(B);
 //        B.addChildren(E);
-//        System.out.println(new ConnectedComponents().getConnecteComponents(graph.graph, 7));
+        System.out.println(new ConnectedComponents().getConnecteComponents(graph.graph, 7));
 //        System.out.println(new ConnectedComponents().canReach(graph,Z, F));
-        System.out.println(new ConnectedComponents().cycleExists(graph));
+//        System.out.println(new ConnectedComponents().cycleExists(graph));
     }
 
     int n;

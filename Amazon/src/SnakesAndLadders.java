@@ -14,7 +14,6 @@ public class SnakesAndLadders {
             this.value = val;
         }
     }
-    default int x;
 
     private Cell[] cellValues;
     Map<Cell, Integer> positionToValue;
@@ -27,7 +26,7 @@ public class SnakesAndLadders {
     public int snakesAndLadders(int[][] board) {
         initialize(board);
         int count = 0;
-        count = traverse(0,0,board);
+//        count = traverse(0,0,board);
         return count;
     }
 
@@ -47,7 +46,7 @@ public class SnakesAndLadders {
         count += traverse(row,col,board,count);
         count += traverse(row,col,board,count);
         count += traverse(row,col,board,count);
-
+return count;
     }
 
     private void initialize(int[][] board) {
