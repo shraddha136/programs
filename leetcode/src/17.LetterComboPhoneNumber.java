@@ -1,6 +1,6 @@
 import java.util.*;
 
-class LetterComboPhoneNumber {
+class  LetterComboPhoneNumber {
     public List<String> letterCombinations(String digits) {
         if(digits == null || digits.length() == 0)
             return new ArrayList<>();
