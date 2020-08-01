@@ -1,69 +1,83 @@
-import java.util.HashMap;
-import java.util.Map;
-import java.util.PriorityQueue;
+import java.util.*;
 
 class LFUCache {
-    class Node {
-        int key;
-        int value;
-        int count;
 
-        public Node(int key, int value, int count) {
-            this.key = key;
-            this.value = value;
-            this.count = count;
-        }
-    }
-
-    PriorityQueue<Node> pq;
-    Map<Integer, Node> map;
     int capacity;
-
+    int minCount;
+    Map<Integer,Integer> keyToVal;
+    Map<Integer,Integer> keyToCount;
+    Map<Integer, LinkedHashSet<Integer>> countToVal;
     public LFUCache(int capacity) {
         this.capacity = capacity;
-        pq = new PriorityQueue<>((a, b) -> (a.count - b.count));
-        map = new HashMap<>();
+        this.minCount = -1;
+        keyToVal = new HashMap<>();
+        keyToCount = new HashMap<>();
+        countToVal = new HashMap<>();
     }
 
     public int get(int key) {
-        Node node = map.get(key);
-        if (node == null) {
+        if(!keyToVal.containsKey(key)){
             return -1;
         }
-        map.get(key).count += 1;
-        return node.value;
+        int count = keyToCount.remove(key);
+        keyToCount.put(key,count+1);
+        countToVal.get(count).remove(key);
+
+        if(count == minCount && countToVal.get(count).size()==0){
+            minCount++;
+        }
+        LinkedHashSet<Integer> LinkedHashSet = new LinkedHashSet<>();
+        if(countToVal.containsKey(count+1)){
+            LinkedHashSet = countToVal.get(count+1);
+        }
+        LinkedHashSet.add(key);
+        countToVal.put(count+1,LinkedHashSet);
+        return keyToVal.get(key);
     }
 
     public void put(int key, int value) {
-        Node node = map.get(key);
-        if (node == null) {
-            if (map.size() == capacity) {
-                node = pq.poll();
-                map.remove(node.key);
+        if(keyToVal.containsKey(key)){
+            keyToVal.put(key,value);
+            get(key);
+            return;
+        }else{
+            if(keyToVal.size() == capacity){
+                int toEvict = countToVal.get(minCount).iterator().next();
+                evict(toEvict);
             }
-            node = new Node(key, value, 1);
-            map.put(key, node);
-            pq.offer(node);
-
-        } else {
-            node.value = value;
-            node.count += 1;
+            keyToVal.put(key,value);
+            keyToCount.put(key,keyToCount.getOrDefault(key,0)+1);
         }
+        int count = keyToCount.get(key);
+        LinkedHashSet<Integer> LinkedHashSet = new LinkedHashSet<>();
+        if(countToVal.containsKey(count)){
+            LinkedHashSet = countToVal.get(count);
+        }
+        LinkedHashSet.add(key);
+        minCount=1;
+        keyToCount.put(key,count);
+        countToVal.put(count,LinkedHashSet);
+    }
+
+    private void evict(int toEvict) {
+        int count = keyToCount.get(toEvict);
+        countToVal.get(count).remove(toEvict);
+        keyToVal.remove(toEvict);
+        keyToCount.remove(toEvict);
     }
 
     public static void main(String[] args) {
-        LFUCache cache = new LFUCache(2 /* capacity */);
-
-        cache.put(1, 1);
-        cache.put(2, 2);
-        System.out.println(cache.get(1)); // returns 1
-        cache.put(3, 3);    // evicts key 2
-        System.out.println(cache.get(2)); // returns -1 (not found)
-        System.out.println(cache.get(3));       // returns 3.
-        cache.put(4, 4);    // evicts key 1.
-        System.out.println(cache.get(1)); // returns -1 (not found)
-        System.out.println(cache.get(3));       // returns 3
-        System.out.println(cache.get(4));       // returns 4
+        LFUCache cache = new LFUCache(2);
+        cache.put(0, 0);
+//        cache.put(2, 2);
+        cache.get(0);       // returns 1
+//        cache.put(3, 3);    // evicts key 2
+//        cache.get(2);       // returns -1 (not found)
+//        cache.get(3);       // returns 3.
+//        cache.put(4, 4);    // evicts key 1.
+//        cache.get(1);       // returns -1 (not found)
+//        cache.get(3);       // returns 3
+//        cache.get(4);       // returns 4
     }
 }
 

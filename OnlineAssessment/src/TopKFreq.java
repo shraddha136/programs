@@ -38,12 +38,12 @@ public class TopKFreq {
     }
 
     public static void main(String[] args) {
-        String[] keyWords = {"anacell", "betacellular", "cetracular", "deltacellular", "eurocell"};
-        String[] reviews = {"I love anacell Best services; Best services provided by anacell",
-                "betacellular has great services",
-                "deltacellular provides much better services than betacellular",
-                "cetracular is worse than anacell",
-                "Betacellular is better than deltacellular."};
+//        String[] keyWords = {"anacell", "betacellular", "cetracular", "deltacellular", "eurocell"};
+        String[] keyWords = {"storage", "battery", "hover", "alexa", "waterproof", "solar"};
+        String[] reviews = {"I wish my Kindle had even more storage",
+                "I wish the battery life on my Kindle lasted 2 years", "I read in the bath and would enjoy a waterproof Kindle",
+                "I want to take my Kindle into the hover. Waterproof please waterproof!", "It would be neat if my Kindle would hover on my desk when not in use",
+                "How cool would it be if my Kindle charged in the sun via solar power?"};
         System.out.println(Arrays.toString(new TopKFreq().getFreq(reviews, keyWords, 2)));
     }
 }
