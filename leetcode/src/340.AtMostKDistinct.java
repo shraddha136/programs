@@ -30,6 +30,34 @@ class AtMostKDistinct {
         return maxLen;
     }
 
+//    public  int countSubstrings(String s,int k){
+//        int count = 0;
+//        int x = k;//setting k to x to check all the substrings
+//        //using sliding window technique find all substrings of length k and above with K unique characters
+//        while(x<s.length()){
+//            for(int i=0;i<=s.length()-x;i++){
+//                if(hasKdistChars(s.substring(i,i+x),k)){
+//                    count++;
+//                    //System.out.println(s.substring(i,i+x));
+//                }
+//            }
+//            x++;
+//        }
+//        return count;
+//    }
+//    //finding substring has k distinct characters using a set
+//    public  boolean hasKdistChars(String str,int k){
+//        Set<Character> set = new HashSet<>();
+//        for(int i=0;i<str.length();i++){
+//            char ch = str.charAt(i);
+//            set.add(ch);
+//            if(set.size()>k){
+//                return false;
+//            }
+//        }
+//        return true;
+//    }
+
     public  int countSubstrings(String s,int k){
         int count = 0;
         int x = k;//setting k to x to check all the substrings
@@ -60,7 +88,7 @@ class AtMostKDistinct {
 
     public static void main(String[] args) {
 //        String s = "LOVELEETCODE";
-        String s = "pqpqs";
+        String s = "awaglks";
         System.out.println(new AtMostKDistinct().countSubstrings(s, 2));
     }
 }

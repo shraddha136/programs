@@ -2,28 +2,50 @@ import java.util.*;
 
 public class FindRelated {
     public static void main(String[] args) {
-        String[][] products = {{"product1", "product2", "product3"}, {"product5", "product2"}, {"product6", "product7"}, {"product8", "product7"}};
+        String[][] products = {{"product1", "product2"}, {"product6", "product7"}};
         System.out.println(findConnected(products));
     }
 
-    private static boolean[] visited;
-    private static Map<Integer, List<Integer>> graph;
-    private static Map<String, Integer> nameToIdMap;
-    FindRelated(){
+    private static Set<String> visited;
+    private static Map<String, List<String>> graph;
+
+    FindRelated() {
 
     }
-    private static int findConnected(String[][] products) {
+
+    private static List<String> findConnected(String[][] products) {
         if (products.length == 0) {
-            return 0;
+            return new ArrayList<>();
         }
-        nameToIdMap = getMap(products);
-        graph = buildGraph(nameToIdMap, products);
-        visited = new boolean[graph.size()];
+        graph = buildGraph(products);
+        visited = new HashSet<>();
         int maxSize = 0;
-        for (int key : graph.keySet()) {
-            maxSize = Math.max(performDFS(graph, key), maxSize);
+        List<String> result = new ArrayList<>();
+        for (String key : graph.keySet()) {
+            if (!visited.contains(key)) {
+                List<String> current = performDFS(graph, key);
+                if (result.size() == current.size()) {
+                    if (isGreater(result, current)) {
+                        result = current;
+                    }
+                } else if (result.size() < current.size()) {
+                    result = current;
+                }
+            }
+
         }
-        return maxSize;
+        return result;
+    }
+
+    private static boolean isGreater(List<String> result, List<String> current) {
+        int i = 0;
+        int j = 0;
+        while (i < result.size()) {
+            if (result.get(i++).compareTo(current.get(j++)) < 0) {
+                return false;
+            }
+        }
+        return true;
     }
 
     private static Map<String, Integer> getMap(String[][] products) {
@@ -39,35 +61,37 @@ public class FindRelated {
         return map;
     }
 
-    private static int performDFS(Map<Integer, List<Integer>> graph, int start) {
-       Stack<Integer> stack = new Stack<>();
-       stack.push(start);
-       int size = 1;
-       while(!stack.isEmpty()){
-           int current = stack.pop();
-           visited[current] = true;
-           for(int child : graph.get(current)){
-               if(!visited[child]){
-                   size++;
-                   stack.push(child);
-               }
-           }
-       }
-       return size;
+    private static List<String> performDFS(Map<String, List<String>> graph, String start) {
+        Stack<String> stack = new Stack<>();
+        stack.push(start);
+        int size = 1;
+        List<String> result = new ArrayList<>();
+        result.add(start);
+        while (!stack.isEmpty()) {
+            String current = stack.pop();
+            visited.add(current);
+            for (String child : graph.get(current)) {
+                if (!visited.contains(child)) {
+                    size++;
+                    result.add(child);
+                    stack.push(child);
+                }
+            }
+        }
+        return result;
     }
 
-    private static Map<Integer, List<Integer>> buildGraph(Map<String, Integer> nameToIdMap, String[][] products) {
-        Map<Integer, List<Integer>> graph = new HashMap<>();
+    private static Map<String, List<String>> buildGraph(String[][] products) {
+        Map<String, List<String>> graph = new LinkedHashMap<>();
         int count = 0;
         for (String[] product : products) {
             for (int j = 0; j < product.length - 1; j++) {
                 ++count;
-                int p1 = nameToIdMap.get(product[j]);
-                int p2 = nameToIdMap.get(product[j + 1]);
-                graph.putIfAbsent(p1, new ArrayList<>());
-                graph.get(p1).add(p2);
-                graph.putIfAbsent(p2, new ArrayList<>());
-                graph.get(p2).add(p1);
+
+                graph.putIfAbsent(product[j], new ArrayList<>());
+                graph.get(product[j]).add(product[j + 1]);
+                graph.putIfAbsent(product[j + 1], new ArrayList<>());
+                graph.get(product[j + 1]).add(product[j]);
             }
         }
         System.out.println(count);
