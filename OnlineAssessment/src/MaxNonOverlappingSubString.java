@@ -58,7 +58,7 @@ public class MaxNonOverlappingSubString {
     }
 
     public static void main(String[] args) {
-        String s = "baddacxb";
+        String s = "bbeadcxede";
         System.out.println(new MaxNonOverlappingSubString().maxNumOfSubstrings(s));
     }
 }
