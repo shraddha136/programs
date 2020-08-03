@@ -2,15 +2,23 @@
 // https://docs.oracle.com/javase/8/docs/api/java/util/Iterator.html
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 class PeekingIterator implements Iterator<Integer> {
     Iterator<Integer> it;
     Integer next;
+    boolean noSuchElements;
     public PeekingIterator(Iterator<Integer> iterator) {
         // initialize any member here.
         it = iterator;
+        advance();
+    }
+
+    private void advance() {
         if(it.hasNext()){
             next = it.next();
+        }else{
+            noSuchElements = true;
         }
     }
 
@@ -23,17 +31,16 @@ class PeekingIterator implements Iterator<Integer> {
     // Override them if needed.
     @Override
     public Integer next() {
-        Integer res = next;
-        if(it.hasNext()){
-            next = it.next();
-        }else{
-            next = null;
+        if(noSuchElements){
+            throw new NoSuchElementException();
         }
+        Integer res = next;
+        advance();
         return res;
     }
 
     @Override
     public boolean hasNext() {
-        return next != null;
+        return !noSuchElements;
     }
 }

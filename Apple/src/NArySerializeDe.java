@@ -46,36 +46,67 @@ public class NArySerializeDe {
     }
 
     // Decodes your encoded data to tree.
+//    public Node deserialize(String data) {
+//        Node root = null;
+//        Stack<Node> stack = new Stack<>();
+//        int i = 0;
+//
+//        while (i < data.length()) {
+//            int start = i;
+//
+//            // Move pointer forward until we don't find a digit...
+//            while (i < data.length() && Character.isDigit(data.charAt(i))) {
+//                i++;
+//            }
+//
+//            // If we haven't found a digit then we must have found the end of a child list...
+//            if (start == i) {
+//                Node child = stack.pop();
+//                if (stack.isEmpty()) {
+//                    root = child;
+//                    break;
+//                } else {
+//                    // Remove the child from the stack and assign it to the previous node on the stack
+//                    stack.peek().children.add(child);
+//                }
+//            } else {
+//                Node n = new Node();
+//                n.val = Integer.parseInt(data.substring(start, i));
+//                n.children = new ArrayList<>();
+//                stack.push(n);
+//            }
+//            i++;
+//        }
+//        return root;
+//    }
     public Node deserialize(String data) {
+        if(data == null || data.length() == 0){
+            return null;
+        }
         Node root = null;
         Stack<Node> stack = new Stack<>();
-        int i = 0;
-
-        while (i < data.length()) {
-            int start = i;
-
-            // Move pointer forward until we don't find a digit...
-            while (i < data.length() && Character.isDigit(data.charAt(i))) {
-                i++;
+        int index = 0;
+        while(index < data.length()){
+            int start = index;
+            while(index < data.length() && Character.isDigit(data.charAt(index))){
+                index++;
             }
 
-            // If we haven't found a digit then we must have found the end of a child list...
-            if (start == i) {
-                Node child = stack.pop();
-                if (stack.isEmpty()) {
-                    root = child;
-                    break;
-                } else {
-                    // Remove the child from the stack and assign it to the previous node on the stack
+            if(index == start){
+                if(!stack.isEmpty()){
+                    Node child = stack.pop();
+                    if(stack.isEmpty()){
+                        root = child;
+                        return root;
+                    }
                     stack.peek().children.add(child);
                 }
-            } else {
-                Node n = new Node();
-                n.val = Integer.parseInt(data.substring(start, i));
-                n.children = new ArrayList<>();
-                stack.push(n);
+            }else{
+                Node node = new Node(Integer.valueOf(data.substring(start,index)));
+                node.children = new ArrayList<>();
+                stack.push(node);
             }
-            i++;
+            index++;
         }
         return root;
     }
