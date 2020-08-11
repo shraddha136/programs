@@ -58,14 +58,48 @@ class TreeBoundary {
         return result;
     }
 
+    static List<Integer> nodes = new ArrayList<>(1000);
+    public static List<Integer> boundaryOfBinaryTree(TreeNode root) {
+
+        if(root == null) return nodes;
+
+        nodes.add(root.val);
+        leftBoundary(root.left);
+        leaves(root.left);
+        leaves(root.right);
+        rightBoundary(root.right);
+
+        return nodes;
+    }
+    public static void leftBoundary(TreeNode root) {
+        if(root == null || (root.left == null && root.right == null)) return;
+        nodes.add(root.val);
+        if(root.left == null) leftBoundary(root.right);
+        else leftBoundary(root.left);
+    }
+    public static void rightBoundary(TreeNode root) {
+        if(root == null || (root.right == null && root.left == null)) return;
+        if(root.right == null)rightBoundary(root.left);
+        else rightBoundary(root.right);
+        nodes.add(root.val); // add after child visit(reverse)
+    }
+    public static void leaves(TreeNode root) {
+        if(root == null) return;
+        if(root.left == null && root.right == null) {
+            nodes.add(root.val);
+            return;
+        }
+        leaves(root.left);
+        leaves(root.right);
+    }
     public static void main(String[] args) {
         TreeNode root = new TreeNode(1);
         root.right = new TreeNode(2);
         root.right.left = new TreeNode(3);
         root.right.right = new TreeNode(4);
-        List<TreeNode> result = findBoundary(root);
-        for (TreeNode node : result) {
-            System.out.print(node.val + " ");
+        List<Integer> result = boundaryOfBinaryTree(root);
+        for (int node : result) {
+            System.out.print(node + " ");
         }
     }
 }

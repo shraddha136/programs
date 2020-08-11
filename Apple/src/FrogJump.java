@@ -46,27 +46,56 @@ public class FrogJump {
         System.out.println(new FrogJump().canCross(stone));
         System.out.println(new FrogJump().canCross2(stone));
     }
-
-    private boolean canCross2(int[] stone) { //O(n^2)
-        Map<Integer,Set<Integer>> jumpMap = new HashMap<>();
-        for(int val : stone){
-            jumpMap.put(val, new HashSet<>());
+    public boolean canCross2(int[] stones) {
+        if(stones == null || stones.length == 0){
+            return true;
         }
+        int end = stones[stones.length-1];
+
+        Map<Integer,Set<Integer>> jumpMap = new HashMap<>();
+        for (int stone : stones) {
+            jumpMap.put(stone, new HashSet<>());
+        }
+
         jumpMap.get(0).add(0);
 
-        for (int currentPos : stone) {
-            for (int jump : jumpMap.get(currentPos)) {
-                for (int step = jump - 1; step <= jump + 1; step++) {
-                    if (step > 0 && jumpMap.containsKey(currentPos + step)) {
-                        jumpMap.get(currentPos + step).add(step);
-                        if (currentPos + step == stone[stone.length - 1]) {
-                            return true;
-                        }
+        for (int currentStone : stones) {
+            Set<Integer> jumps = jumpMap.get(currentStone);
+            for (int jump : jumps) {
+                for (int hop = jump - 1; hop <= jump + 1; hop++) {
+                    if(currentStone + hop == end){
+                        return true;
+                    }
+                    if (hop>0 && jumpMap.containsKey(currentStone + hop)) {
+                        jumpMap.get(currentStone + hop).add(hop);
                     }
                 }
-
             }
         }
         return false;
     }
+
+
+//    private boolean canCross2(int[] stone) { //O(n^2)
+//        Map<Integer,Set<Integer>> jumpMap = new HashMap<>();
+//        for(int val : stone){
+//            jumpMap.put(val, new HashSet<>());
+//        }
+//        jumpMap.get(0).add(0);
+//
+//        for (int currentPos : stone) {
+//            for (int jump : jumpMap.get(currentPos)) {
+//                for (int step = jump - 1; step <= jump + 1; step++) {
+//                    if (step > 0 && jumpMap.containsKey(currentPos + step)) {
+//                        jumpMap.get(currentPos + step).add(step);
+//                        if (currentPos + step == stone[stone.length - 1]) {
+//                            return true;
+//                        }
+//                    }
+//                }
+//
+//            }
+//        }
+//        return false;
+//    }
 }

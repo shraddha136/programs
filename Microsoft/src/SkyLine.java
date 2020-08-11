@@ -1,5 +1,14 @@
 import java.util.*;
 
+
+
+
+
+//split into start and end and height
+//sort by small start
+//PQ maxheap on height
+//when start add to heap, if max changes add to result;
+//when end, remove from heap, if max changes, add to result
 public class SkyLine {
     static class myBuild implements Comparable<myBuild>{
         int val;

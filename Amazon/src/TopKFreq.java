@@ -32,8 +32,39 @@ public class TopKFreq {
         return result;
     }
 
+//    public List<String> topKFrequent(String[] words, int k) {
+//        Map<String, Integer> map = new HashMap<>();
+//        for (String word : words) {
+//            map.put(word, map.getOrDefault(word, 0) + 1);
+//        }
+//
+//        ArrayList<String>[] count = new ArrayList[words.length + 1];
+//        for (Map.Entry<String, Integer> entry : map.entrySet()) {
+//            if (count[entry.getValue()] == null) {
+//                count[entry.getValue()] = new ArrayList<>();
+//            }
+//            count[entry.getValue()].add(entry.getKey());
+//        }
+//
+//        List<String> result = new ArrayList<>();
+//        for (int i = count.length - 1; i >= 0; i--) {
+//            if (count[i] != null) {
+//                for (int j = 0; j < count[i].size(); j++) {
+//                    if (k > 0) {
+//                        result.add(count[i].get(j));
+//                        k--;
+//                    }
+//                    if (k == 0) {
+//                        return result;
+//                    }
+//                }
+//            }
+//        }
+//        return result;
+//    }
+
     public static void main(String[] args) {
-        int[] a = {1,1,1,2,2,3};
+        int[] a = {1, 1, 1, 2, 2, 3};
         System.out.println(Arrays.toString(new TopKFreq().topKFrequent(a, 2)));
     }
 }

@@ -11,7 +11,6 @@ public class CombinationSum2 {
     }
 
     private void findCombo(int[] candidates, int index, int target, ArrayList<Integer> list, List<List<Integer>> result) {
-
         if (target == 0) {
             result.add(new ArrayList<>(list));
             return;
