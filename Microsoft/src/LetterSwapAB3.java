@@ -30,9 +30,9 @@ public class LetterSwapAB3 {
     }
 
     public static void main(String[] args) {
-        System.out.println(new LetterSwapAB3().minSwap("baaab"));
-        System.out.println(new LetterSwapAB3().minSwap("baaaabaaab"));
-        System.out.println(new LetterSwapAB3().minSwap("baaaaaaab"));
+//        System.out.println(new LetterSwapAB3().minSwap("baaab"));
+//        System.out.println(new LetterSwapAB3().minSwap("baaaabaaab"));
+//        System.out.println(new LetterSwapAB3().minSwap("baaaaaaab"));
         System.out.println(new LetterSwapAB3().minSwap("baaaaaaaaaab"));
     }
 

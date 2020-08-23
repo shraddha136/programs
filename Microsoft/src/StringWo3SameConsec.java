@@ -1,4 +1,4 @@
-public class StringWo3SameConsec {
+public class                                            StringWo3SameConsec {
     public static String stringWithout3IdenticalConsecLetters(String str){
         if(str == null || str.length()==0){
             return str;
